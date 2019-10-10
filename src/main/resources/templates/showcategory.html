@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Your Post</title>
+    <style>
+        .masthead {
+            height: 100vh;
+            min-height: 10px;
+            background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+            background-size: cover;
+            background-position: center;
+            background-repeat: repeat;
+        }
+        .card-body-mid{
+            display: table-cell;
+            line-height:1.5em;
+            height: 9em;
+            vertical-align: middle;
+            overflow:hidden;
+        }
+        img{
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            height: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body class="masthead">
+
+<div th:insert="base::navbar"></div>
+
+<div class="container h-100">
+    No. : <span th:text="${category.categoryID}"></span><br/>
+    Category: <span th:text="${category.categoryName}"></span><br/>
+
+</div>
+
+
+<!--
+         <span th:if="${car.pic} !=null">
+            <img th:src="${car.pic}"></span>
+            -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
