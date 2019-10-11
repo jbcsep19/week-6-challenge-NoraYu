@@ -69,11 +69,12 @@
 
 
             <td th:text="${category.categoryName}" th:href="@{searchbycategory/{categoryName}(categoryName=${category.categoryName})}"></td>
+            <td th:text="${category.categoryID}" th:href="@{searchbycategory/{categoryID}(categoryName=${category.categoryID})}"></td>
             <td>
 <!--                <a th:href="@{update/{id}(id=${category.categoryID})}">Update</a>-->
-                <a th:href="@{detail/{id}(id=${category.categoryID})}"class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Details</a>
-                <a th:href="@{delete/{id}(id=${category.categoryID})}" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Delete</a>
-                <a th:href="@{{categoryName}(categoryName=${category.categoryName})}" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Check cars</a>
+                <a th:href="@{detail/{id}(id=${category.categoryID})}"class="btn btn-primary  active btn-sm" role="button" aria-pressed="true">Details</a>
+                <a th:href="@{delete/{id}(id=${category.categoryID})}" class="btn btn-danger  active btn-sm" role="button" aria-pressed="true">Delete</a>
+                <a th:href="@{{categoryName}(categoryName=${category.categoryName})}" class="btn btn-success active btn-sm" role="button" aria-pressed="true">Check cars</a>
             </td>
         </tr>
     </table>
