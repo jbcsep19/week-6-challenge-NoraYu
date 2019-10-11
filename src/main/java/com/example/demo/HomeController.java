@@ -1,15 +1,20 @@
 package com.example.demo;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Map;
 import javax.validation.Valid;
 
 @Controller
@@ -20,6 +25,9 @@ public class HomeController {
 
     @Autowired
     CarRepository carRepository;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @RequestMapping("/")
     public String home(Model model) {
@@ -40,6 +48,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "categoryform";
         }
+
         categoryRepository.save(category);
 
         return "redirect:/categorylist";
@@ -60,7 +69,25 @@ public class HomeController {
     }
 
     @PostMapping("/process_car")
-    public String processCarForm(@Valid Car car, BindingResult result) {
+    public String processCarForm(@Valid Car car, @RequestParam("file") MultipartFile file, BindingResult result,@RequestParam String pic) {
+        if (file.isEmpty()) {
+            //if(!car.getPic().equalsIgnoreCase("https://article.images.consumerreports.org/f_auto/prod/content/dam/CRO%20Images%202018/Magazine/12December/CR-Magazine-Inline-Road-Test-December2018Issue-HondaInsight-10-18"))
+
+            //car.setDefaultPic();
+            car.setPic(pic);
+            carRepository.save(car);
+            return "redirect:/";
+        }
+
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            car.setPic(uploadResult.get("url").toString());
+            carRepository.save(car);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/addcar";
+        }
         if (result.hasErrors()) {
             return "carform";
         }
@@ -113,9 +140,13 @@ public class HomeController {
     }
 
     @RequestMapping("/update_car/{id}")
-    public String updateCar(@PathVariable("id") long id, Model model) {
+    public String updateCar(@PathVariable("id") long id, Model model,@ModelAttribute Car car, @ModelAttribute Category category) {
         model.addAttribute("car", carRepository.findById(id).get());
         model.addAttribute("categorys", categoryRepository.findAll());
+        car=carRepository.findById(id).get();
+        String pic=car.getPic();
+        model.addAttribute("pic",pic);
+
         return "carform";
     }
 

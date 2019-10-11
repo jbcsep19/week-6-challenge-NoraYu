@@ -40,9 +40,11 @@
         Price:<input type="text" th:field="*{price}"/><br />
         <span th:if="${#fields.hasErrors('price')}"
               th:errors="*{price}"></span><br />
+        <input type="hidden" th:field="*{pic}" th:value="${pic}"/>
 
 
         <input type="file" name="file"/>
+
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
     </form>
 </div>

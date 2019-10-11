@@ -39,6 +39,7 @@
                 <img th:src="${car.pic}" alt="car image">
             </div>
             <h1 class="font-weight-light"> <span th:text="${car.carName}"></span></h1>
+            <p class="lead">Category: <span th:text="${car.category.categoryName}"></span></p>
             <p class="lead">Price: $ <span th:text="${car.price}"></span></p>
             <p class="lead">Color: <span th:text="${car.color}"></span></p>
             <p class="lead">Make: <span th:text="${car.make}"></span></p>
